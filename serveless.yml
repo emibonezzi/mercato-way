@@ -1,0 +1,15 @@
+service: mercato-way
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+
+functions:
+  mercato-way:
+    handler: index.handler
+    events:
+      - schedule: rate(1 hour)
+
+plugins:
+  - serverless-offline

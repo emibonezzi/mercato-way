@@ -38,6 +38,4 @@ async function main() {
   await tweetUpdates(headlines);
 }
 
-main(); // REMOVE THIS BEFORE DEPLOYMENT
-
 module.exports.handler = main;
