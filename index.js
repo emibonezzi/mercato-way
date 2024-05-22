@@ -8,8 +8,6 @@ const tweetUpdates = require("./handlers/tweetUpdates");
 async function main() {
   // get reddit access token
   const accessToken = await getAccessToken();
-  // get twitter access token
-
   // get posts
   const posts = await getPosts(accessToken);
   // filter post by flairs and exclude bad domains
