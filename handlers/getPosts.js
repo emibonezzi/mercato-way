@@ -12,6 +12,6 @@ module.exports = async (accessToken) => {
     });
     return data.children;
   } catch (err) {
-    console.error(err);
+    console.log("Error in retrieving reddit posts...", err.message);
   }
 };
