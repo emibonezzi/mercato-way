@@ -3,10 +3,13 @@ const checkDb = require("./handlers/checkDb");
 const filterPosts = require("./handlers/filterPosts");
 const getHeadlines = require("./handlers/getHeadlines");
 const getPosts = require("./handlers/getPosts");
+const tweetUpdates = require("./handlers/tweetUpdates");
 
 async function main() {
   // get reddit access token
   const accessToken = await getAccessToken();
+  // get twitter access token
+
   // get posts
   const posts = await getPosts(accessToken);
   // filter post by flairs and exclude bad domains
@@ -23,8 +26,6 @@ async function main() {
   // check in db for entries
   const updates = await checkDb(titles);
 
-  console.log(updates);
-
   // if no new updates return
   if (updates.length === 0) return console.log("No new updates.");
 
@@ -32,6 +33,9 @@ async function main() {
   const headlines = await getHeadlines(updates);
 
   console.log(headlines);
+
+  // tweet the headlines
+  await tweetUpdates(headlines);
 }
 
 main(); // REMOVE THIS BEFORE DEPLOYMENT
