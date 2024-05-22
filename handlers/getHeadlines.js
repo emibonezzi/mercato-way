@@ -36,6 +36,6 @@ module.exports = async (titles) => {
       headline.choices[0].message.content.toUpperCase()
     );
   } catch (err) {
-    console.error(err);
+    console.log("Error in generating headlines with OpenAI...", err.message);
   }
 };
