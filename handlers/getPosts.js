@@ -2,10 +2,10 @@ const axios = require("axios");
 
 module.exports = async (accessToken) => {
   try {
-    // send request to r/soccer for last 3 post in rising
+    // send request to r/soccer for last posts in rising
     const {
       data: { data },
-    } = await axios.get("https://oauth.reddit.com/r/soccer/rising", {
+    } = await axios.get("https://oauth.reddit.com/r/soccer/new", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
