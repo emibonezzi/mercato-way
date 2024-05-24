@@ -5,9 +5,12 @@ module.exports = async (accessToken) => {
     // send request to r/soccer for last posts in rising
     const {
       data: { data },
-    } = await axios.get("https://oauth.reddit.com/r/soccer/rising", {
+    } = await axios.get("https://oauth.reddit.com/r/soccer/top", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        t: "hour",
       },
     });
     return data.children;
