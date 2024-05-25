@@ -10,7 +10,7 @@ module.exports = async (accessToken) => {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        t: "hour",
+        t: "day",
       },
     });
     return data.children;
