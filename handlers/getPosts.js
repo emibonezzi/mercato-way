@@ -2,7 +2,7 @@ const axios = require("axios");
 
 module.exports = async (accessToken) => {
   try {
-    // send request to r/soccer for last posts in rising
+    // search for post with defined flairs
     const {
       data: { data },
     } = await axios.get("https://oauth.reddit.com/r/soccer/search", {
