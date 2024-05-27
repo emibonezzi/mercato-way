@@ -13,7 +13,8 @@ async function main() {
   // filter post by flairs and exclude bad domains
   const filteredPosts = filterPosts(posts);
   // if empty return
-  if (filteredPosts.length === 0) return console.log("No relevant posts.");
+  if (!filteredPosts && filteredPosts.length === 0)
+    return console.log("No relevant posts.");
 
   // collect titles and sources
   const titles = filteredPosts.map((post) => ({
