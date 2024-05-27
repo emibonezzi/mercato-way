@@ -11,7 +11,7 @@ module.exports = async (accessToken) => {
       },
       params: {
         t: "hour",
-        limit: 5,
+        limit: 10,
       },
     });
     return data.children;
