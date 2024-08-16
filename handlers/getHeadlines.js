@@ -1,6 +1,6 @@
 const axios = require("axios");
 const input =
-  "You are receving an update with a title and source url. Take this format: FED REPORT SHOWS 72% OF U.S. HOUSEHOLDS SAY THEY WERE AT LEAST OK  FINANCIALLY IN OCTOBER 2023 VS 73% A YEAR EARLIER AND LOWEST SHARE SINCE  2016 and transform the title you're receiving in that format. Either extract the source name from the title or from the url string. Make sure you stay in an acceptable length typical of a bloomberg terminal update";
+  "You are receiving an update with a title and source url. Take this style of reporting as an example: `⚪️🇫🇷 Tottenham invest important fee on French winger Wilson Odobert as he was in the list of several clubs in UK and Italy.\n\n£25m fixed fee, £5m add-ons and also 10% sell-on clause for Burnley.\n\nFive year deal, shirt no. 29 and medical also completed in London.\n\nBig surprise. 🪄` and transform the title you're receiving in that format. Either extract the source name from the title or from the url string. Make sure you stay in an acceptable length typical of a tweet";
 
 module.exports = async (titles) => {
   try {
@@ -32,9 +32,7 @@ module.exports = async (titles) => {
         return response.data;
       })
     );
-    return headlines.map((headline) =>
-      headline.choices[0].message.content.toUpperCase()
-    );
+    return headlines.map((headline) => headline.choices[0].message.content);
   } catch (err) {
     console.log("Error in generating headlines with OpenAI...", err.message);
   }
