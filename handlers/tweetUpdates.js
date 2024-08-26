@@ -1,4 +1,5 @@
 const { TwitterApi } = require("twitter-api-v2");
+const uploadToThreads = require("./uploadToThreads");
 
 const client = new TwitterApi({
   appKey: process.env.TWITTER_CONSUMER_KEY,
@@ -12,7 +13,12 @@ const rwClient = client.readWrite;
 module.exports = async (updates) => {
   try {
     await Promise.all(
-      updates.map(async (update) => await rwClient.v2.tweet(update))
+      updates.map(async (update) => {
+        // tweet
+        await rwClient.v2.tweet(update);
+        // threads
+        await uploadToThreads(update);
+      })
     );
   } catch (err) {
     console.log("Error while tweeting the updates...", err.message);
