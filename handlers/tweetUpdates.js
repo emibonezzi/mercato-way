@@ -14,10 +14,10 @@ module.exports = async (updates) => {
   try {
     await Promise.all(
       updates.map(async (update) => {
-        // tweet
-        await rwClient.v2.tweet(update);
         // threads
         await uploadToThreads(update);
+        // tweet
+        await rwClient.v2.tweet(update);
       })
     );
   } catch (err) {
