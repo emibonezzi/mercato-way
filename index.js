@@ -22,8 +22,12 @@ async function main() {
     url: post.data.url,
   }));
 
+  console.log(titles);
+
   // check in db for entries
   const updates = await checkDb(titles);
+
+  console.log(updates);
 
   // if no new updates return
   if (updates.length === 0) return console.log("No new updates.");

@@ -14,13 +14,18 @@ module.exports = async (updates) => {
   try {
     await Promise.all(
       updates.map(async (update) => {
-        // threads
-        await uploadToThreads(update);
         // tweet
         await rwClient.v2.tweet(update);
       })
     );
+    //
+    await Promise.all(
+      updates.map(async (update) => {
+        // threads
+        await uploadToThreads(update);
+      })
+    );
   } catch (err) {
-    console.log("Error while tweeting the updates...", err.message);
+    console.log("Error while posting the updates...", err.message);
   }
 };

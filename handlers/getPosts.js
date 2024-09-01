@@ -10,7 +10,7 @@ module.exports = async (accessToken) => {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        q: 'flair:"News" OR flair:"Transfers" OR flair:"Quotes" OR flair:"Official Source"',
+        q: 'flair:"Transfers"',
         restrict_sr: "true",
         limit: 25,
         t: "hour",
