@@ -15,19 +15,20 @@ module.exports = async (titles) => {
     );
 
     for (const titleObj of titles) {
-      const existingNews = await News.findOne({ title: titleObj.title });
+      const existingNews = await News.findOne({
+        url: titleObj.data.url,
+      });
+
       // if news is not found
       if (!existingNews) {
+        console.log("🚨 News not found", JSON.stringify(titleObj.data.title));
         const news = new News({
-          title: titleObj.title,
-          url: titleObj.url,
+          title: titleObj.data.title,
+          url: titleObj.data.url,
         });
         await news.save();
         // add to updates arr
-        updates.push({
-          title: titleObj.title,
-          url: titleObj.url,
-        });
+        updates.push(titleObj);
       }
     }
 

@@ -1,5 +1,5 @@
 const { TwitterApi } = require("twitter-api-v2");
-const uploadToThreads = require("./uploadToThreads");
+const downloadImage = require("./downloadImage");
 
 const client = new TwitterApi({
   appKey: process.env.TWITTER_CONSUMER_KEY,
@@ -12,20 +12,15 @@ const rwClient = client.readWrite;
 
 module.exports = async (updates) => {
   try {
-    await Promise.all(
-      updates.map(async (update) => {
-        // tweet
-        await rwClient.v2.tweet(update);
-      })
-    );
-    //
-    await Promise.all(
-      updates.map(async (update) => {
-        // threads
-        await uploadToThreads(update);
-      })
-    );
+    for (const update of updates) {
+      // check if post has image
+      if (update.directImageUrl) {
+        const image = await downloadImage(update.directImageUrl);
+        // Upload the short video to Twitter
+        const mediaId = await rwClient.v1.uploadMedia(image);
+      }
+    }
   } catch (err) {
-    console.log("Error while posting the updates...", err.message);
+    console.log("Error in uploading to twitter...", err.message);
   }
 };

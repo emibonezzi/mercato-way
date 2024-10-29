@@ -1,44 +1,38 @@
 const getAccessToken = require("./auth/reddit/getAccessToken");
 const checkDb = require("./handlers/checkDb");
 const filterPosts = require("./handlers/filterPosts");
-const getHeadlines = require("./handlers/getHeadlines");
 const getPosts = require("./handlers/getPosts");
-const tweetUpdates = require("./handlers/tweetUpdates");
+const postUpdates = require("./handlers/postUpdates");
 
 async function main() {
   // get reddit access token
   const accessToken = await getAccessToken();
   // get posts
   const posts = await getPosts(accessToken);
-  // filter post by flairs and exclude bad domains
-  const filteredPosts = filterPosts(posts);
-  // if empty return
-  if (!filteredPosts && filteredPosts.length === 0)
-    return console.log("No relevant posts.");
-
-  // collect titles and sources
-  const titles = filteredPosts.map((post) => ({
-    title: post.data.title,
-    url: post.data.url,
-  }));
-
-  console.log(titles);
 
   // check in db for entries
-  const updates = await checkDb(titles);
-
-  console.log(updates);
+  const updates = await checkDb(posts);
 
   // if no new updates return
   if (updates.length === 0) return console.log("No new updates.");
 
-  // clean them with openAI
-  const headlines = await getHeadlines(updates);
+  console.log("🧾 New updates ready to be processed:\n");
+  updates.map((update) => {
+    console.log(update.data.title);
+  });
 
-  console.log(headlines);
+  // filter post by AI
+  const filteredPosts = await filterPosts(updates);
 
-  // tweet the headlines
-  await tweetUpdates(headlines);
+  console.log("✅ Headlines generated:\n");
+  console.log(filteredPosts);
+
+  // if no new updates return
+  if (filteredPosts.length === 0) return console.log("No relevant updates.");
+
+  // post on threads and twitter
+  await postUpdates(filteredPosts);
 }
 
 module.exports.handler = main;
+// main();
