@@ -40,7 +40,7 @@ module.exports = async (updates) => {
       // analyze results
       const bestImageIndex = await analyzeImages({
         title: update.originalRedditTitle,
-        imageArray: imageArray.slice(0, 10),
+        imageArray: imageArray.slice(0, 30),
       });
       console.log(
         "🔎 Analyzing images...\nBest relevant image is at index",

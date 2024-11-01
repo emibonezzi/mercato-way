@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const input = `You are receiving an object with an array of images and an article title. You need to analyze the array and find the most relevant image to the given title, avoiding if possible stock photography websites (e.g alamy, getty images) . Respond with a json object shaped like this: 
+const input = `You are receiving an object with an array of images and an article title. You need to analyze the array and find the most relevant image to the given title, avoiding, if possible, stock photography websites (e.g alamy, getty images), make sure it's recent, as of 2024, using the info you are given in the array. HAS TO BE FOOTBALL/SOCCER related. Respond with a json object shaped like this: 
   { 
   indexOfTheMostRelevantImage: number // the index of the relevant image
   } 
