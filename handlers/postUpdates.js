@@ -7,7 +7,7 @@ const postArticleOnTwitter = require("./postArticleOnTwitter");
 
 module.exports = async (updates) => {
   for (const update of updates) {
-    // check if is title is self explanatory and is not an image
+    // check if is title is not self explanatory and is not an image
     if (!update.directImageUrl && !update.isTitleExhaustive) {
       // post title and article's url on threads
       await postArticleOnThreads(update.tweet, update.url);

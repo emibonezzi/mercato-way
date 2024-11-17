@@ -27,7 +27,7 @@ async function main() {
   console.log("✅ Headlines generated:\n");
   console.log(filteredPosts);
 
-  // if no new updates return
+  // if no relevant updates return
   if (filteredPosts.length === 0) return console.log("No relevant updates.");
 
   // post on threads and twitter
