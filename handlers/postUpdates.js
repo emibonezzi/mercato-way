@@ -47,7 +47,8 @@ module.exports = async (updates) => {
         bestImageIndex
       );
       // take best picture
-      const firstRelevantPictureURL = imageArray[bestImageIndex].image;
+      const firstRelevantPictureURL =
+        imageArray[bestImageIndex].originalImageUrl;
       // post on threads with newly searched image
       await postOnThreads(update.tweet, firstRelevantPictureURL);
       // post on threads with newly searched image

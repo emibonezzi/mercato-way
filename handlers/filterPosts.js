@@ -4,7 +4,7 @@ const input = `You are receiving a post object retrieved from the reddit API fro
   { 
   originalRedditTitle: string // original reddit post title
   url: string // url linked to the post
-  isRelevantNews: boolean // return false if the post doesn't involve major clubs/players in the world or if is a troll post by reddit users
+  isRelevantNews: boolean // return false if the post doesn't involve major clubs/players in the world or if is a post by reddit user asking questions, trolling, discussing
   isVideo: boolean // return true if is_video is true OR if the url linked to the post is a video platform (e.g YouTube, Streamable, Streaminone, Caulse etc...) OR if the title is a goal update in this format or similar: [Team 1] - [Team 2] - [Goalscorer] [Minute]
   isTitleExhaustive: boolean // return false if the title it's not self explanatory but only reports the article title and it's inviting users to read the linked url/article (e.g title: "How Rodri wrestled the Ballon d’Or from the powerful grasp of La Liga" should return false)
   directImageUrl: string | null, // return the URL if the reddit post has direct image URL, null if it hasn't
